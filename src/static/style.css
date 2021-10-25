@@ -157,9 +157,17 @@ main {
 .refresh:focus,
 .refresh:hover {
   opacity: 0.8;
-  transform: translateX(1.1);
 }
 
+.refresh svg {
+  fill: white;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
 /* Results Table Section */
 .results-list-main {
   width: 100%;
