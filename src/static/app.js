@@ -1,25 +1,15 @@
-const RANDOM_CONTENT_URL = "http://metaphorpsum.com/paragraphs/1/10";
+// const RANDOM_CONTENT_URL = "http://metaphorpsum.com/paragraphs/1/10";
+import "./style.css";
+import getData from "./data.js";
 const wordsElement = document.getElementById("words");
 const timerElement = document.getElementById("timer");
-import "./style.css";
 
 function getDomElement(selector) {
   return document.querySelector(selector);
 }
-// GETTING DATA FROM API
-function fetchContent(url, sendData) {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function () {
-    const data = this.responseText;
-    sendData(data);
-  };
-  xhttp.open("GET", RANDOM_CONTENT_URL);
-  xhttp.send();
-}
 
 // UPDATE CONTENT OF Content Element
-function updateWords(data) {
-  const words = data.split(" ");
+function updateWords(words) {
   words.forEach((word) => {
     const spanElement = document.createElement("span");
     spanElement.innerText = word;
@@ -29,8 +19,9 @@ function updateWords(data) {
   wordsElement.querySelector("span").classList.add("highlight");
 }
 
-// CALLING FETCH CONTENT TO UPDATE DATA
-fetchContent(RANDOM_CONTENT_URL, updateWords);
+// CALLING GetData TO UPDATE Words
+const words = getData();
+updateWords(words);
 
 // Calculate RESULTS AND GIVING THE DATA TO showResults
 function calculateTypingResults() {
@@ -173,9 +164,13 @@ class TypeCheck {
 
   // REFRESHING BUTTON RESETS ALL VALUE TO DEFAULT
   refresh = () => {
+    this.btn.firstElementChild.animate(
+      [{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }],
+      300
+    );
     wordsElement.innerText = null;
     wordsElement.style.setProperty("--transformTop", 0);
-    fetchContent(RANDOM_CONTENT_URL, updateWords);
+    updateWords(getData());
     this.timerRunning = false;
     this.timerTime = 0;
     timerElement.innerText = "01:00";

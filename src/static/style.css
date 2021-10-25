@@ -157,7 +157,6 @@ main {
 .refresh:focus,
 .refresh:hover {
   opacity: 0.8;
-  transform: translateX(1.1);
 }
 
 /* Results Table Section */
