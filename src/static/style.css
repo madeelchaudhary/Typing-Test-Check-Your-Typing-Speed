@@ -159,6 +159,15 @@ main {
   opacity: 0.8;
 }
 
+.refresh svg {
+  fill: white;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
 /* Results Table Section */
 .results-list-main {
   width: 100%;
